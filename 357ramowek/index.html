@@ -98,7 +98,7 @@
             <button style="margin: 10px; padding: 10px" onclick="updateSchedule()">357 Start!</button>
         </center>
     </div>
-    <div id="scheduleContainer"></div>
+    <div style="display: none;" id="scheduleContainer"></div>
 
     <script>
         var schedule_date = ""; // Variable to store the selected date
@@ -111,9 +111,13 @@
         function createScheduleDiv(data) {
             var scheduleContainer = document.getElementById("scheduleContainer");
             scheduleContainer.innerHTML = "";
-
+			scheduleContainer.style.display = "block";
+			
+			var counter = 0;
+			
             for (var date in data) {
-                if (data.hasOwnProperty(date)) {
+				counter = counter + 1;
+                if (data.hasOwnProperty(date) && counter > 3) {
                     var dateContainer = document.createElement("div");
                     dateContainer.className = "schedule-container";
                     scheduleContainer.appendChild(dateContainer);
