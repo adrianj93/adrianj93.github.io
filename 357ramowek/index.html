@@ -2,170 +2,149 @@
 <html>
 <head>
     <title>Radio357 Schedule</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* Common table styles */
+		@font-face {
+			font-family:"Neue World";
+			src: url("font1.ttf");
+			font-family:"Inter";
+			src: url("font2.ttf");
+		}
         body {
-            font-family: Arial, sans-serif;
+            font-family: Inter, sans-serif;
             background-color: #f2f2f2;
-        }
-        .tftable {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-            border: 1px solid #ddd;
-        }
-        .tftable th, .tftable td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        .tftable th {
-            background-color: #333;
-            color: #fff;
-        }
-        .tftable td {
-            background-color: #f9f9f9;
         }
 
-        /* Subtable styles */
-        .subtable {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .subtable th, .subtable td {
+        .schedule-container {
+            background-color: #fff;
             border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 12px;
+        }
+
+        .date-header {
+            background-color: #f95f1f;
+            color: #fff;
+            padding: 8px;
+        }
+
+        .schedule-row {
+            border: 1px solid #ddd;
+        }
+
+        .time-cell {
+            float: left;
             padding: 8px;
             text-align: left;
+            width: 100px;
         }
-        .subtable th {
-            background-color: #555;
-            color: #fff;
-        }
-        .subtable td {
-            background-color: #f2f2f2;
+
+        .program-cell {
+            padding: 8px;
+            text-align: left;
         }
 
         /* Mobile responsive styles */
         @media screen and (max-width: 300px) {
-            .tftable {
+            .schedule-container {
                 font-size: 14px;
-            }
-            .tftable th, .tftable td {
                 padding: 8px;
+                margin: 8px;
             }
         }
-		
-		*,
-		*:before,
-		*:after{
-			padding: 0;
-			margin: 0;
-			box-sizing: border-box;
-		}
-		input[type="date"]{
-			background-color: #D8FE47;
-			padding: 10px;
-			margin: 10px;
-			font-family: "Neue World";
-			color: #000000;
-			font-size: 18px;
-			border: none;
-			outline: none;
-			border-radius: 5px;
-		}
-		::-webkit-calendar-picker-indicator{
-			background-color: #ffffff;
-			padding: 5px;
-			cursor: pointer;
-			border-radius: 3px;
-		}
+
+        *,
+        *:before,
+        *:after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        input[type="date"] {
+            background-color: #D8FE47;
+            padding: 10px;
+            margin: 10px;
+            font-family: "Neue World";
+            color: #000000;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        ::-webkit-calendar-picker-indicator {
+            background-color: #ffffff;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body onload="onLoad()">
     <div>
         <center>
-		<label for="datePicker">Wybierz dzień:</label>
-        <input type="date" id="datePicker">
-		</br>
-        <button style="margin: 10px; padding: 10px" onclick="updateSchedule()">357 Start!</button>
-		</center>
-
+            <label for="datePicker">Wybierz dzień:</label>
+            <input type="date" id="datePicker">
+            <br>
+            <button style="margin: 10px; padding: 10px" onclick="updateSchedule()">357 Start!</button>
+        </center>
     </div>
-    <div id="scheduleTableContainer"></div>
+    <div id="scheduleContainer"></div>
 
     <script>
         var schedule_date = ""; // Variable to store the selected date
 
-        // Function to create the schedule table
-		function onLoad() {
-			document.getElementById('datePicker').valueAsDate = new Date();
-		}
-        function createScheduleTable(data) {
-            var scheduleTableContainer = document.getElementById("scheduleTableContainer");
+        // Function to create the schedule div-based layout
+        function onLoad() {
+            document.getElementById('datePicker').valueAsDate = new Date();
+        }
 
-            // Create the main table element
-            var mainTable = document.createElement("table");
-            mainTable.className = "tftable";
+        function createScheduleDiv(data) {
+            var scheduleContainer = document.getElementById("scheduleContainer");
+            scheduleContainer.innerHTML = "";
 
-            // Create header row for the main table
-            var headerRow = mainTable.insertRow(0);
-            var scheduleHeader = headerRow.insertCell(0);
-            scheduleHeader.textContent = "Ramówka";
-
-            // Loop through the JSON response
-			var offset = 0;
             for (var date in data) {
-			    offset = offset + 1;
-                if (data.hasOwnProperty(date) && offset > 3) {
-                    var row = mainTable.insertRow(-1);
-                    var scheduleCell = row.insertCell(0);
+                if (data.hasOwnProperty(date)) {
+                    var dateContainer = document.createElement("div");
+                    dateContainer.className = "schedule-container";
+                    scheduleContainer.appendChild(dateContainer);
 
-                    // Create a subtable for the schedule
-                    var subTable = document.createElement("table");
-                    subTable.className = "subtable";
-                    scheduleCell.appendChild(subTable);
+                    var dateHeader = document.createElement("div");
+                    dateHeader.className = "date-header";
+                    dateHeader.textContent = date;
+                    dateContainer.appendChild(dateHeader);
 
-                    // Create header row for the subtable
-					var subHeaderRowDate = subTable.insertRow(0);
-					var startHeaderDate = subHeaderRowDate.insertCell(0);
-					subHeaderRowDate.textContent = date;
-					subHeaderRowDate.style.height = "30px";
-                    var subHeaderRow = subTable.insertRow(1);
-                    var startHeader = subHeaderRow.insertCell(0);
-                    startHeader.textContent = "Godzina";
-					startHeader.style.width = "5%";
-                    var programNameHeader = subHeaderRow.insertCell(1);
-                    programNameHeader.textContent = "Audycja";
-					programNameHeader.style.width = "20%";
-                    var authorHeader = subHeaderRow.insertCell(2);
-                    authorHeader.textContent = "Zaprasza";
+                    data[date].forEach(function (program) {
+                        var scheduleRow = document.createElement("div");
+                        scheduleRow.className = "schedule-row";
+                        dateContainer.appendChild(scheduleRow);
 
-                    // Loop through the programs for this date
-                    data[date].forEach(function(program) {
-                        var subRow = subTable.insertRow(-1);
-                        var startCell = subRow.insertCell(0);
-						var d = new Date(program.start);
-                        startCell.textContent = d.getHours()+":"+(d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
-						var d = new Date('2015-03-04T00:00:00.000Z');
-						console.log(d.getUTCHours()); // Hours
-						console.log(d.getUTCMinutes());
-						console.log(d.getUTCSeconds());
-                        var programNameCell = subRow.insertCell(1);
-                        programNameCell.textContent = program.program.name;
-                        var authorCell = subRow.insertCell(2);
-						try {
-						    authorCell.textContent = program.team[0].name + ", " + program.team[1].name;
-						} catch(err) {
-							authorCell.textContent = program.team[0].name;
-						}
+                        var timeCell = document.createElement("div");
+                        timeCell.className = "time-cell";
+                        var d = new Date(program.start);
+                        timeCell.textContent = d.getHours() + ":" + (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+                        scheduleRow.appendChild(timeCell);
 
+                        var programCell = document.createElement("div");
+                        programCell.className = "program-cell";
+                        var authors;
+                        try {
+                            authors = program.team[0].name + ", " + program.team[1].name;
+                        } catch (err) {
+                            authors = program.team[0].name;
+                        }
+                        programCell.innerHTML = '<span style="font-family: Neue World; font-size: 22px;">' + program.program.name + '</span>' + '<br/>' + '<span style="font-size: 15px;">' + authors+ '</span>';
+                        scheduleRow.appendChild(programCell);
                     });
                 }
             }
-
-            scheduleTableContainer.innerHTML = ""; // Clear the container
-            scheduleTableContainer.appendChild(mainTable);
         }
 
         // Function to update the schedule based on the selected date
@@ -177,7 +156,7 @@
             fetch("https://static.radio357.pl/api/content/v1/schedule/" + schedule_date)
                 .then(response => response.json())
                 .then(data => {
-                    createScheduleTable(data);
+                    createScheduleDiv(data);
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
