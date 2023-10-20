@@ -129,9 +129,9 @@
 			Ramufkarz 357
 			</div>
             <label for="datePicker">Wybierz dzień:</label>
-            <input type="date" id="datePicker">
+            <input onchange="updateSchedule()" type="date" id="datePicker">
             <br>
-            <button style="margin: 10px; padding: 10px" onclick="updateSchedule()">357 Start!</button>
+            <button style="margin: 10px; padding: 10px" id="startButton" onclick="updateSchedule()">357 Start!</button>
         </center>
     </div>
     <div style="display: none;" id="scheduleContainer"></div>
@@ -193,7 +193,9 @@
 
         // Function to update the schedule based on the selected date
         function updateSchedule() {
-            var datePicker = document.getElementById("datePicker");
+            var datePicker = document.getElementById("startButton");
+			startButton.style.display = "none";
+			var datePicker = document.getElementById("datePicker");
             schedule_date = datePicker.value;
 
             // Fetch JSON data for the selected date
@@ -206,9 +208,6 @@
                     console.error("Error fetching data:", error);
                 });
         }
-
-        // Initial call to load the schedule for the current date
-        updateSchedule();
     </script>
 </body>
 </html>
