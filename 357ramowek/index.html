@@ -110,10 +110,7 @@
 
             // Create header row for the main table
             var headerRow = mainTable.insertRow(0);
-            var dateHeader = headerRow.insertCell(0);
-            dateHeader.textContent = "Data";
-			dateHeader.style.width = "10%";
-            var scheduleHeader = headerRow.insertCell(1);
+            var scheduleHeader = headerRow.insertCell(0);
             scheduleHeader.textContent = "Ramówka";
 
             // Loop through the JSON response
@@ -122,18 +119,19 @@
 			    offset = offset + 1;
                 if (data.hasOwnProperty(date) && offset > 3) {
                     var row = mainTable.insertRow(-1);
-                    var dateCell = row.insertCell(0);
-                    dateCell.textContent = date;
-                    var scheduleCell = row.insertCell(1);
+                    var scheduleCell = row.insertCell(0);
 
                     // Create a subtable for the schedule
                     var subTable = document.createElement("table");
                     subTable.className = "subtable";
-					dateCell.style.width = "10%";
                     scheduleCell.appendChild(subTable);
 
                     // Create header row for the subtable
-                    var subHeaderRow = subTable.insertRow(0);
+					var subHeaderRowDate = subTable.insertRow(0);
+					var startHeaderDate = subHeaderRowDate.insertCell(0);
+					subHeaderRowDate.textContent = date;
+					subHeaderRowDate.style.height = "30px";
+                    var subHeaderRow = subTable.insertRow(1);
                     var startHeader = subHeaderRow.insertCell(0);
                     startHeader.textContent = "Godzina";
 					startHeader.style.width = "5%";
