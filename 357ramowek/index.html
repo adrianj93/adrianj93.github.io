@@ -54,13 +54,42 @@
                 padding: 8px;
             }
         }
+		
+		*,
+		*:before,
+		*:after{
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+		input[type="date"]{
+			background-color: #D8FE47;
+			padding: 10px;
+			margin: 10px;
+			font-family: "Neue World";
+			color: #000000;
+			font-size: 18px;
+			border: none;
+			outline: none;
+			border-radius: 5px;
+		}
+		::-webkit-calendar-picker-indicator{
+			background-color: #ffffff;
+			padding: 5px;
+			cursor: pointer;
+			border-radius: 3px;
+		}
     </style>
 </head>
-<body>
+<body onload="onLoad()">
     <div>
-        <label for="datePicker">Select Date:</label>
+        <center>
+		<label for="datePicker">Wybierz dzień:</label>
         <input type="date" id="datePicker">
-        <button onclick="updateSchedule()">Update Schedule</button>
+		</br>
+        <button style="margin: 10px; padding: 10px" onclick="updateSchedule()">357 Start!</button>
+		</center>
+
     </div>
     <div id="scheduleTableContainer"></div>
 
@@ -68,6 +97,9 @@
         var schedule_date = ""; // Variable to store the selected date
 
         // Function to create the schedule table
+		function onLoad() {
+			document.getElementById('datePicker').valueAsDate = new Date();
+		}
         function createScheduleTable(data) {
             var scheduleTableContainer = document.getElementById("scheduleTableContainer");
 
@@ -78,13 +110,16 @@
             // Create header row for the main table
             var headerRow = mainTable.insertRow(0);
             var dateHeader = headerRow.insertCell(0);
-            dateHeader.textContent = "Date";
+            dateHeader.textContent = "Data";
+			dateHeader.style.width = "10%";
             var scheduleHeader = headerRow.insertCell(1);
-            scheduleHeader.textContent = "Schedule";
+            scheduleHeader.textContent = "Ramówka";
 
             // Loop through the JSON response
+			var offset = 0;
             for (var date in data) {
-                if (data.hasOwnProperty(date)) {
+			    offset = offset + 1;
+                if (data.hasOwnProperty(date) && offset > 3) {
                     var row = mainTable.insertRow(-1);
                     var dateCell = row.insertCell(0);
                     dateCell.textContent = date;
@@ -93,16 +128,19 @@
                     // Create a subtable for the schedule
                     var subTable = document.createElement("table");
                     subTable.className = "subtable";
+					dateCell.style.width = "10%";
                     scheduleCell.appendChild(subTable);
 
                     // Create header row for the subtable
                     var subHeaderRow = subTable.insertRow(0);
                     var startHeader = subHeaderRow.insertCell(0);
-                    startHeader.textContent = "Start";
+                    startHeader.textContent = "Godzina";
+					startHeader.style.width = "5%";
                     var programNameHeader = subHeaderRow.insertCell(1);
-                    programNameHeader.textContent = "Program Name";
+                    programNameHeader.textContent = "Audycja";
+					programNameHeader.style.width = "20%";
                     var authorHeader = subHeaderRow.insertCell(2);
-                    authorHeader.textContent = "Author";
+                    authorHeader.textContent = "Zaprasza";
 
                     // Loop through the programs for this date
                     data[date].forEach(function(program) {
@@ -117,7 +155,12 @@
                         var programNameCell = subRow.insertCell(1);
                         programNameCell.textContent = program.program.name;
                         var authorCell = subRow.insertCell(2);
-                        authorCell.textContent = program.team[0].name;
+						try {
+						    authorCell.textContent = program.team[0].name + ", " + program.team[1].name;
+						} catch(err) {
+							authorCell.textContent = program.team[0].name;
+						}
+
                     });
                 }
             }
