@@ -3,20 +3,56 @@
 <head>
     <title>Radio357 Schedule</title>
     <style>
+        /* Common table styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
         .tftable {
             width: 100%;
             border-collapse: collapse;
+            background-color: #fff;
+            border: 1px solid #ddd;
         }
         .tftable th, .tftable td {
-            border: 1px solid black;
-            padding: 8px;
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
         }
+        .tftable th {
+            background-color: #333;
+            color: #fff;
+        }
+        .tftable td {
+            background-color: #f9f9f9;
+        }
+
+        /* Subtable styles */
         .subtable {
             width: 100%;
+            border-collapse: collapse;
         }
         .subtable th, .subtable td {
-            border: 1px solid black;
+            border: 1px solid #ddd;
             padding: 8px;
+            text-align: left;
+        }
+        .subtable th {
+            background-color: #555;
+            color: #fff;
+        }
+        .subtable td {
+            background-color: #f2f2f2;
+        }
+
+        /* Mobile responsive styles */
+        @media screen and (max-width: 600px) {
+            .tftable {
+                font-size: 14px;
+            }
+            .tftable th, .tftable td {
+                padding: 8px;
+            }
         }
     </style>
 </head>
@@ -65,14 +101,23 @@
                     startHeader.textContent = "Start";
                     var programNameHeader = subHeaderRow.insertCell(1);
                     programNameHeader.textContent = "Program Name";
+                    var authorHeader = subHeaderRow.insertCell(2);
+                    authorHeader.textContent = "Author";
 
                     // Loop through the programs for this date
                     data[date].forEach(function(program) {
                         var subRow = subTable.insertRow(-1);
                         var startCell = subRow.insertCell(0);
-                        startCell.textContent = program.start;
+						var d = new Date(program.start);
+                        startCell.textContent = d.getHours()+":"+(d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+						var d = new Date('2015-03-04T00:00:00.000Z');
+						console.log(d.getUTCHours()); // Hours
+						console.log(d.getUTCMinutes());
+						console.log(d.getUTCSeconds());
                         var programNameCell = subRow.insertCell(1);
                         programNameCell.textContent = program.program.name;
+                        var authorCell = subRow.insertCell(2);
+                        authorCell.textContent = program.team[0].name;
                     });
                 }
             }
