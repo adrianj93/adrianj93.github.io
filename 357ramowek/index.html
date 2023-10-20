@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ramufkoficz357</title>
+    <title>Ramufkarz357</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
 		@font-face {
@@ -21,8 +21,10 @@
             background-color: #fff;
             border: 1px solid #ddd;
             padding: 10px;
-            margin: 10px;
+            margin: auto;
+			margin-bottom: 10px;
 			border-radius: 15px;
+			max-width: 700px;
         }
 
         .header {
@@ -37,10 +39,16 @@
             color: #fff;
             padding: 8px;
 			border-radius: 7px 7px 0px 0px;
+			padding-top: 15px;
+			font-size: 25px;
+			font-family: font1;
+			text-align: center;
         }
 
         .schedule-row {
             border: 1px solid #ddd;
+			background-position: bottom right;
+			background-repeat: no-repeat;
         }
 
         .time-cell {
@@ -113,8 +121,8 @@
 <body onload="onLoad()">
     <div>
         <center>
-			<div style="font-family: font1; font-size: 50px; margin-top: 15px">
-			Ramufkoficz 357
+			<div style="font-family: font1; font-size: 53px; margin-top: 15px">
+			Ramufkarz 357
 			</div>
             <label for="datePicker">Wybierz dzień:</label>
             <input type="date" id="datePicker">
@@ -148,12 +156,14 @@
 
                     var dateHeader = document.createElement("div");
                     dateHeader.className = "date-header";
-                    dateHeader.textContent = date;
+					var dateParsed = new Date(date);
+                    dateHeader.textContent = dateParsed.getDate() + "." + ("0" + (dateParsed.getMonth() + 1)).slice(-2) + "." + dateParsed.getFullYear();
                     dateContainer.appendChild(dateHeader);
 
                     data[date].forEach(function (program) {
                         var scheduleRow = document.createElement("div");
                         scheduleRow.className = "schedule-row";
+
                         dateContainer.appendChild(scheduleRow);
 
                         var timeCell = document.createElement("div");
