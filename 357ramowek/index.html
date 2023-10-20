@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
 		@font-face {
-			font-family:"Neue World";
-			src: url("font1.TTF");
-			font-family:"Inter";
+			font-family: font1;
+			src: url("font1.ttf");
+		}
+		@font-face {
+			font-family: font2;
 			src: url("font2.ttf");
 		}
         body {
-            font-family: Inter, sans-serif;
+            font-family: "font2", sans-serif;
             background-color: #f2f2f2;
         }
 
@@ -71,9 +73,9 @@
             background-color: #D8FE47;
             padding: 10px;
             margin: 10px;
-            font-family: "Neue World";
+            font-family: "font1", serif;
             color: #000000;
-            font-size: 18px;
+            font-size: 19px;
             border: none;
             outline: none;
             border-radius: 5px;
@@ -140,7 +142,7 @@
                         } catch (err) {
                             authors = program.team[0].name;
                         }
-                        programCell.innerHTML = '<span style="font-family: Neue World; font-size: 22px;">' + program.program.name + '</span>' + '<br/>' + '<span style="font-size: 15px;">' + authors+ '</span>';
+                        programCell.innerHTML = '<span style="font-family: font1; font-size: 22px;">' + program.program.name + '</span>' + '<br/>' + '<span style="font-size: 15px;">' + authors+ '</span>';
                         scheduleRow.appendChild(programCell);
                     });
                 }
