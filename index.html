@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Radio357 Schedule</title>
+    <style>
+        .tftable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .tftable th, .tftable td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        .subtable {
+            width: 100%;
+        }
+        .subtable th, .subtable td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label for="datePicker">Select Date:</label>
+        <input type="date" id="datePicker">
+        <button onclick="updateSchedule()">Update Schedule</button>
+    </div>
+    <div id="scheduleTableContainer"></div>
+
+    <script>
+        var schedule_date = ""; // Variable to store the selected date
+
+        // Function to create the schedule table
+        function createScheduleTable(data) {
+            var scheduleTableContainer = document.getElementById("scheduleTableContainer");
+
+            // Create the main table element
+            var mainTable = document.createElement("table");
+            mainTable.className = "tftable";
+
+            // Create header row for the main table
+            var headerRow = mainTable.insertRow(0);
+            var dateHeader = headerRow.insertCell(0);
+            dateHeader.textContent = "Date";
+            var scheduleHeader = headerRow.insertCell(1);
+            scheduleHeader.textContent = "Schedule";
+
+            // Loop through the JSON response
+            for (var date in data) {
+                if (data.hasOwnProperty(date)) {
+                    var row = mainTable.insertRow(-1);
+                    var dateCell = row.insertCell(0);
+                    dateCell.textContent = date;
+                    var scheduleCell = row.insertCell(1);
+
+                    // Create a subtable for the schedule
+                    var subTable = document.createElement("table");
+                    subTable.className = "subtable";
+                    scheduleCell.appendChild(subTable);
+
+                    // Create header row for the subtable
+                    var subHeaderRow = subTable.insertRow(0);
+                    var startHeader = subHeaderRow.insertCell(0);
+                    startHeader.textContent = "Start";
+                    var programNameHeader = subHeaderRow.insertCell(1);
+                    programNameHeader.textContent = "Program Name";
+
+                    // Loop through the programs for this date
+                    data[date].forEach(function(program) {
+                        var subRow = subTable.insertRow(-1);
+                        var startCell = subRow.insertCell(0);
+                        startCell.textContent = program.start;
+                        var programNameCell = subRow.insertCell(1);
+                        programNameCell.textContent = program.program.name;
+                    });
+                }
+            }
+
+            scheduleTableContainer.innerHTML = ""; // Clear the container
+            scheduleTableContainer.appendChild(mainTable);
+        }
+
+        // Function to update the schedule based on the selected date
+        function updateSchedule() {
+            var datePicker = document.getElementById("datePicker");
+            schedule_date = datePicker.value;
+
+            // Fetch JSON data for the selected date
+            fetch("https://static.radio357.pl/api/content/v1/schedule/" + schedule_date)
+                .then(response => response.json())
+                .then(data => {
+                    createScheduleTable(data);
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+        }
+
+        // Initial call to load the schedule for the current date
+        updateSchedule();
+    </script>
+</body>
+</html>
