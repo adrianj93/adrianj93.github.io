@@ -78,6 +78,13 @@
 			font-size: 12px;
 			color: #CCCCCC;
 		}
+		
+		.program_pic {
+			width: 55px;
+			height: 55px;
+			margin: 0px;
+			border-radius: 7px;
+		}
 
         /* Mobile responsive styles */
         @media screen and (max-width: 300px) {
@@ -205,7 +212,8 @@
                         } catch (err) {
                             authors = program.team[0].name;
                         }
-                        programCell.innerHTML = '<span style="font-family: font1; font-size: 22px;">' + program.program.name + '</span>' + '<br/>' + '<span style="font-size: 15px;">' + authors+ '</span>';
+						image = program.image;
+                        programCell.innerHTML = '<div style="float: left"><span style="font-family: font1; font-size: 22px;">' + program.program.name + '</span>' + '<br/>' + '<span style="font-size: 15px;">' + authors+ '</span></div><div style="margin: -4px -4px -8px 0px; float: right"><img class="program_pic" src="' + image + '"></div><div style="clear: both"></div>';
                         scheduleRow.appendChild(programCell);
                     });
                 }
