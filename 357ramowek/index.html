@@ -65,7 +65,7 @@
             float: left;
             padding: 8px;
             text-align: left;
-            width: 72px;
+            width: 60px;
         }
 
         .program-cell {
@@ -77,7 +77,7 @@
             margin: auto;
 			margin-top: 35px;
 			margin-bottom: 15px;
-			max-width: 700px;
+			max-width: 600px;
 			text-align: center;
 			font-size: 12px;
 			color: #CCCCCC;
@@ -91,10 +91,6 @@
 			float: left;
 		}
 		
-		.program_desc {
-			background: green;
-			float: right;
-		}
 
         /* Mobile responsive styles */
         @media screen and (max-width: 300px) {
@@ -252,7 +248,7 @@
 							descIndicator = '<span class="material-symbols-outlined">description</span>';
 							}
                         programCell.innerHTML = 
-							'<div style="float: left"><span style="font-family: font1; font-size: 22px;">' + program_name + '</span>' + descIndicator + '<br/>' + '<span style="font-size: 15px;">' + authors +'</span></div>' + '<div style="margin: -4px -4px -8px 0px; float: right"><img class="program_pic" title="' + authors + '" src="' + image + '"></div>'
+							'<div style="float: left"><span style="font-family: font1; font-size: 22px;">' + program_name + '</span>' + descIndicator + '<br/>' + '<span style="color: #737373; font-size: 15px;">' + authors +'</span></div>' + '<div style="margin: -4px -4px -8px 0px; float: right"><img class="program_pic" title="' + authors + '" src="' + image + '"></div>'
 							+ '<div style="clear: both"></div>';
                         scheduleRow.appendChild(programCell);
                     });
