@@ -207,13 +207,19 @@
                         var programCell = document.createElement("div");
                         programCell.className = "program-cell";
                         var authors;
+						var program_name;
+                        try {
+                            program_name = program.program.name;
+                        } catch (err) {
+                            program_name = "Audycja bez nazwy";
+                        }	
                         try {
                             authors = program.team[0].name + ", " + program.team[1].name;
                         } catch (err) {
                             authors = program.team[0].name;
                         }
 						image = program.image;
-                        programCell.innerHTML = '<div style="float: left"><span style="font-family: font1; font-size: 22px;">' + program.program.name + '</span>' + '<br/>' + '<span style="font-size: 15px;">' + authors+ '</span></div><div style="margin: -4px -4px -8px 0px; float: right"><img class="program_pic" src="' + image + '"></div><div style="clear: both"></div>';
+                        programCell.innerHTML = '<div style="float: left"><span style="font-family: font1; font-size: 22px;">' + program_name + '</span>' + '<br/>' + '<span style="font-size: 15px;">' + authors+ '</span></div><div style="margin: -4px -4px -8px 0px; float: right"><img class="program_pic" src="' + image + '"></div><div style="clear: both"></div>';
                         scheduleRow.appendChild(programCell);
                     });
                 }
