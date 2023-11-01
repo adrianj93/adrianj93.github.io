@@ -195,6 +195,8 @@
 			scheduleContainer.style.display = "block";
 			
 			var counter = 0;
+            var currentDate = new Date();
+            var nextDate = new Date(2060, 1, 1, 0, 0, 0);
 			
             for (var date in data) {
 				counter = counter + 1;
@@ -217,12 +219,25 @@
 
                         var timeCell = document.createElement("div");
                         timeCell.className = "time-cell";
-                        var d = new Date(program.start);
-                        timeCell.textContent = d.getHours() + ":" + (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+                        var scheduled = new Date(program.start);
+
+                        var endAt = new Date (program.endAt);
+                        var inProgress = false;
+                        
+                        if (  scheduled < currentDate && currentDate < endAt  ) {
+                            scheduleRow.style.boxShadow = "0px 0px 20px -6px rgba(249, 138, 58, 1)";
+                            inProgress = true;
+                        }
+
+                        
+                        timeCell.textContent = scheduled.getHours() + ":" + (scheduled.getMinutes() < 10 ? '0' : '') + scheduled.getMinutes();
                         scheduleRow.appendChild(timeCell);
 
                         var programCell = document.createElement("div");
                         programCell.className = "program-cell";
+                        if (inProgress) {
+                            programCell.style.color = "#F98A3A";
+                        }
                         var authors;
 						var program_name;
                         try {
