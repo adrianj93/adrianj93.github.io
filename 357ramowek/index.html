@@ -218,9 +218,6 @@
 					var dateParsed = new Date(date);
                     var monthName;
 
-
-                    dateHeader.textContent = dateParsed.getDate() + "." + ("0" + (dateParsed.getMonth() + 1)).slice(-2) + "." + dateParsed.getFullYear();
-                    console.log(dateParsed.getMonth());
                     if (dateParsed.getMonth() == 0) {
                         monthName = 'stycznia';
                         dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear();
@@ -298,7 +295,7 @@
                             authors = program.team[0].name + ", " + program.team[1].name + " i " + program.team[2].name;
                         } catch (err) {
                             try {
-                                authors = program.team[0].name + ", " + program.team[1].name;
+                                authors = program.team[0].name + " i " + program.team[1].name;
                                     } catch (err) {  
                                         try {
                                             authors = program.team[0].name;
