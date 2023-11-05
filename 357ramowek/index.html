@@ -216,7 +216,48 @@
                     var dateHeader = document.createElement("div");
                     dateHeader.className = "date-header";
 					var dateParsed = new Date(date);
+                    var monthName;
+
+
                     dateHeader.textContent = dateParsed.getDate() + "." + ("0" + (dateParsed.getMonth() + 1)).slice(-2) + "." + dateParsed.getFullYear();
+                    console.log(dateParsed.getMonth());
+                    if (dateParsed.getMonth() == 0) {
+                        monthName = 'stycznia';
+                        dateHeader.textContent = dateParsed.getDate() + ". " + monthName + " " + dateParsed.getFullYear();
+                    } else if (dateParsed.getMonth() == 1) {
+                        monthName = 'lutego';
+                        dateHeader.textContent = dateParsed.getDate() + ". " + monthName + " " + dateParsed.getFullYear();
+                    } else if (dateParsed.getMonth() == 2) {
+                        monthName = 'marca';
+                        dateHeader.textContent = dateParsed.getDate() + ". " + monthName + " " + dateParsed.getFullYear();
+                    } else if (dateParsed.getMonth() == 3) {
+                        monthName = 'kwietnia';
+                        dateHeader.textContent = dateParsed.getDate() + ". " + monthName + " " + dateParsed.getFullYear();
+                    } else if (dateParsed.getMonth() == 4) {
+                        monthName = 'maja';
+                        dateHeader.textContent = dateParsed.getDate() + ". " + monthName + " " + dateParsed.getFullYear();
+                    } else if (dateParsed.getMonth() == 5) {
+                        monthName = 'czerwca';
+                        dateHeader.textContent = dateParsed.getDate() + ". " + monthName + " " + dateParsed.getFullYear();
+                    } else if (dateParsed.getMonth() == 6) {
+                        monthName = 'lipca';
+                        dateHeader.textContent = dateParsed.getDate() + ". " + monthName + " " + dateParsed.getFullYear();
+                    } else if (dateParsed.getMonth() == 7) {
+                        monthName = 'sierpnia';
+                        dateHeader.textContent = dateParsed.getDate() + ". " + monthName + " " + dateParsed.getFullYear();
+                    } else if (dateParsed.getMonth() == 8) {
+                        monthName = 'września';
+                        dateHeader.textContent = dateParsed.getDate() + ". " + monthName + " " + dateParsed.getFullYear();
+                    } else if (dateParsed.getMonth() == 9) {
+                        monthName = 'października';
+                        dateHeader.textContent = dateParsed.getDate() + ". " + monthName + " " + dateParsed.getFullYear();
+                    } else if (dateParsed.getMonth() == 10) {
+                        monthName = 'listopada';
+                        dateHeader.textContent = dateParsed.getDate() + ". " + monthName + " " + dateParsed.getFullYear();
+                    } else if (dateParsed.getMonth() == 11) {
+                        monthName = 'grudnia';
+                        dateHeader.textContent = dateParsed.getDate() + ". " + monthName + " " + dateParsed.getFullYear();
+                    }
                     dateContainer.appendChild(dateHeader);
 
                     data[date].forEach(function (program) {
@@ -255,7 +296,7 @@
                         }	
                         try {
                             authors = program.team[0].name + ", " + program.team[1].name + " i " + program.team[2].name;
-                        } catch {
+                        } catch (err) {
                             try {
                                 authors = program.team[0].name + ", " + program.team[1].name;
                                     } catch (err) {  
@@ -265,6 +306,7 @@
                                             authors = "Radio 357";
                                         }
                                     }
+                        console.log(err);
                         }
 
 						image = program.image;
