@@ -182,6 +182,14 @@
     <div style="display: none;" id="scheduleContainer"></div>
 	<div class="copyright">© 2023, BDNT™</div>
     <script>
+        window.matchMedia('(prefers-color-scheme: dark)')
+            .addEventListener('change',({ matches }) => {
+        if (matches) {
+            console.log("change to dark mode!")
+        } else {
+            console.log("change to light mode!")
+        }
+        })
         var schedule_date = ""; // Variable to store the selected date
 
         // Function to create the schedule div-based layout
@@ -246,14 +254,19 @@
                             program_name = "Audycja bez nazwy w API";
                         }	
                         try {
-                            authors = program.team[0].name + ", " + program.team[1].name;
-                        } catch (err) {  
-							try {
-								authors = program.team[0].name;
-							} catch (err) {
-								authors = "Radio 357";
-							}
+                            authors = program.team[0].name + ", " + program.team[1].name + " i " + program.team[2].name;
+                        } catch {
+                            try {
+                                authors = program.team[0].name + ", " + program.team[1].name;
+                                    } catch (err) {  
+                                        try {
+                                            authors = program.team[0].name;
+                                        } catch (err) {
+                                            authors = "Radio 357";
+                                        }
+                                    }
                         }
+
 						image = program.image;
 						var description;
 						description = program.description;
