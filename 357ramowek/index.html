@@ -4,168 +4,7 @@
     <title>Ramufkarz357</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style>
-		@font-face {
-			font-family: font1;
-			src: url("font1.TTF");
-		}
-		@font-face {
-			font-family: font2;
-			src: url("font2.ttf");
-		}
-        body {
-            font-family: "font2", sans-serif;
-            background-color: #f2f2f2;
-        }
-
-        .schedule-container {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin: auto;
-			margin-bottom: 10px;
-			border-radius: 15px;
-			max-width: 700px;
-			box-shadow: 0px 15px 44px -16px rgba(0, 0, 0, 0.15);
-        }
-
-        .header {
-            background-color: #333;
-            color: #fff;
-            padding: 12px;
-
-        }
-
-        .date-header {
-            background-color: #f95f1f;
-            color: #fff;
-            padding: 8px;
-			border-radius: 7px 7px 0px 0px;
-			padding-top: 15px;
-			font-size: 25px;
-			font-family: font1;
-			text-align: center;
-        }
-
-        .schedule-row {
-            border: 1px solid #F5F5F5;
-			background-position: bottom right;
-			background-repeat: no-repeat;
-			transition: all .2s ease !important;
-        }
-        
-		.schedule-row:hover {
-            background-color: #F5F5F5;
-        }
-		.schedule-row:active {
-            background-color: #D1D1D1;
-        }
-
-        .time-cell {
-            float: left;
-            padding: 8px;
-            text-align: left;
-            width: 60px;
-        }
-
-        .program-cell {
-            padding: 8px;
-            text-align: left;
-        }
-		
-		.copyright {
-            margin: auto;
-			margin-top: 35px;
-			margin-bottom: 15px;
-			max-width: 600px;
-			text-align: center;
-			font-size: 12px;
-			color: #CCCCCC;
-		}
-		
-		.program_pic {
-			width: 55px;
-			height: 55px;
-			margin: 0px;
-			border-radius: 7px;
-			float: left;
-		}
-		
-
-        /* Mobile responsive styles */
-        @media screen and (max-width: 300px) {
-            .schedule-container {
-                font-size: 14px;
-                padding: 8px;
-                margin: 8px;
-            }
-        }
-
-        *,
-        *:before,
-        *:after {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        input[type="date"] {
-            background-color: #D8FE47;
-            padding: 10px;
-            margin: 10px;
-            font-family: "font1", serif;
-            color: #000000;
-            font-size: 19px;
-            border: none;
-            outline: none;
-            border-radius: 5px;
-			transition: all .2s ease !important;
-        }
-		
-        input[type="date"]:hover {
-            background-color: #DFFE8B;
-        }
-        input[type="date"]:active {
-            background-color: #ABC938;
-        }
-
-        ::-webkit-calendar-picker-indicator {
-            background-color: #ffffff;
-            padding: 5px;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-		
-		button {
-			background-color: #f95f1f;
-			font-family: font1;
-			font-size: 20px;
-			color: #ffffff;
-			border-radius: 5px;
-			border: 0px;
-			width: 265px;
-			transition: all .2s ease !important;
-		}
-		
-		.material-symbols-outlined {
-		  font-variation-settings:
-		  'FILL' 0,
-		  'wght' 400,
-		  'GRAD' 0,
-		  'opsz' 24;
-		  font-size: 16px;
-		  margin: 0px 7px;
-		  color: #ADADAD;
-		}
-		
-		button:hover {
-			background-color: #F98A3A;
-		}
-		
-		button:active {
-			background-color: #A13D14;
-		}
-    </style>
+    <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body onload="onLoad()">
     <div>
@@ -294,17 +133,21 @@
                             program_name = "Audycja bez nazwy w API";
                         }	
                         try {
-                            authors = program.team[0].name + ", " + program.team[1].name + " i " + program.team[2].name;
+                            authors = program.team[0].name + ", " + program.team[1].name + ", " + program.team[2].name + " i " + program.team[3].name;
                         } catch (err) {
-                            try {
-                                authors = program.team[0].name + " i " + program.team[1].name;
-                                    } catch (err) {  
-                                        try {
-                                            authors = program.team[0].name;
-                                        } catch (err) {
-                                            authors = "Radio 357";
-                                        }
-                                    }
+                                try {
+                                authors = program.team[0].name + ", " + program.team[1].name + " i " + program.team[2].name;
+                                } catch (err) {
+                                    try {
+                                        authors = program.team[0].name + " i " + program.team[1].name;
+                                            } catch (err) {  
+                                                try {
+                                                    authors = program.team[0].name;
+                                                } catch (err) {
+                                                    authors = "Radio 357";
+                                                }
+                                            }
+                                }
                         console.log(err);
                         }
 
