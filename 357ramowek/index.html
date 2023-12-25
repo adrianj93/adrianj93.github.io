@@ -4,7 +4,7 @@
     <title>Ramufkarz357</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+    <link rel="stylesheet" type="text/css" href="./assets/style.css"/>
 </head>
 <body onload="onLoad()">
     <div>
@@ -160,7 +160,7 @@
 							descIndicator = '<span class="material-symbols-outlined">description</span>';
 							}
                         programCell.innerHTML = 
-							'<div style="float: left"><span style="font-family: font1; font-size: 22px;">' + program_name + '</span>' + descIndicator + '<br/>' + '<span style="color: #737373; font-size: 15px;">' + authors +'</span></div>' + '<div style="margin: -4px -4px -8px 0px; float: right"><img class="program_pic" title="' + authors + '" src="' + image + '" onclick="copyToClipboard('+ description +')"></div>'
+							'<div style="float: left"><span style="font-family: font1; font-size: 22px;">' + program_name + '</span>' + descIndicator + '<br/>' + '<div><span style="color: #737373; font-size: 15px">' + authors +'</span></div></div>' + '<div style="margin: -4px -4px -8px 0px; float: right"><img class="program_pic" title="' + authors + '" src="' + image + '" onclick="copyToClipboard(\''+ description +'\')"></div>'
 							+ '<div style="clear: both"></div>';
                         scheduleRow.appendChild(programCell);
                     });
@@ -184,10 +184,6 @@
                 .catch(error => {
                     console.error("Error fetching data:", error);
                 });
-        }
-
-        function copyToClipboard(description) {
-            navigator.clipboard.writeText(description.value);
         }
     </script>
 </body>
