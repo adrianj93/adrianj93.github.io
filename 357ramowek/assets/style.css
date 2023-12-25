@@ -42,7 +42,7 @@ body {
 }
 
 .schedule-row {
-    border: 1px solid #F5F5F5;
+    border-top: 1px solid #F5F5F5;
     background-position: bottom right;
     background-repeat: no-repeat;
     transition: all .2s ease !important;
