@@ -49,10 +49,10 @@ body {
 }
 
 .schedule-row:hover {
-    background-color: #F5F5F5;
+    background-color: #0000000a;
 }
 .schedule-row:active {
-    background-color: #D1D1D1;
+    background-color: #00000028;
 }
 
 .time-cell {
