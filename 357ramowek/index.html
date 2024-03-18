@@ -60,40 +60,40 @@
 
                     if (dateParsed.getMonth() == 0) {
                         monthName = 'stycznia';
-                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear();
+                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear() + " - " + getDayName(dateParsed, "pl-PL");
                     } else if (dateParsed.getMonth() == 1) {
                         monthName = 'lutego';
-                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear();
+                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear() + " - " + getDayName(dateParsed, "pl-PL");
                     } else if (dateParsed.getMonth() == 2) {
                         monthName = 'marca';
-                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear();
+                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear() + " - " + getDayName(dateParsed, "pl-PL");
                     } else if (dateParsed.getMonth() == 3) {
                         monthName = 'kwietnia';
-                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear();
+                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear() + " - " + getDayName(dateParsed, "pl-PL");
                     } else if (dateParsed.getMonth() == 4) {
                         monthName = 'maja';
-                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear();
+                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear() + " - " + getDayName(dateParsed, "pl-PL");
                     } else if (dateParsed.getMonth() == 5) {
                         monthName = 'czerwca';
-                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear();
+                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear() + " - " + getDayName(dateParsed, "pl-PL");
                     } else if (dateParsed.getMonth() == 6) {
                         monthName = 'lipca';
-                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear();
+                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear() + " - " + getDayName(dateParsed, "pl-PL");
                     } else if (dateParsed.getMonth() == 7) {
                         monthName = 'sierpnia';
-                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear();
+                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear() + " - " + getDayName(dateParsed, "pl-PL");
                     } else if (dateParsed.getMonth() == 8) {
                         monthName = 'września';
-                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear();
+                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear() + " - " + getDayName(dateParsed, "pl-PL");
                     } else if (dateParsed.getMonth() == 9) {
                         monthName = 'października';
-                        dateHeader.textContent = dateParsed.getDate() + ". " + monthName + " " + dateParsed.getFullYear();
+                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear() + " - " + getDayName(dateParsed, "pl-PL");
                     } else if (dateParsed.getMonth() == 10) {
                         monthName = 'listopada';
-                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear();
+                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear() + " - " + getDayName(dateParsed, "pl-PL");
                     } else if (dateParsed.getMonth() == 11) {
                         monthName = 'grudnia';
-                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear();
+                        dateHeader.textContent = dateParsed.getDate() + " " + monthName + " " + dateParsed.getFullYear() + " - " + getDayName(dateParsed, "pl-PL");
                     }
                     dateContainer.appendChild(dateHeader);
 
@@ -160,6 +160,15 @@
 							scheduleRow.onclick = function() { alert(description) };
 							descIndicator = '<span class="material-symbols-outlined">description</span>';
 							}
+                        var programAds = "";
+                        try {
+                            var programAds = program.ads;
+                        } catch {
+                            ///
+                        }
+						if (programAds != "") {
+							descIndicator.concat(" ", '<span class="material-symbols-outlined">description</span>');
+							}
                         programCell.innerHTML = 
 							'<div style="float: left; width: 70%"><span style="font-family: font1; font-size: 23px;">' + program_name + '</span>' + descIndicator + '<br/>' + '<div style="float: left;"><span style="color: #737373; font-size: 15px">' + authors +'</span></div></div>' + '<div style="margin: -4px -4px -8px 0px; float: right"><img class="program_pic" title="' + authors + '" src="' + image + '" onclick="copyToClipboard(\''+ description +'\')"></div>'
 							+ '<div style="clear: both"></div>';
@@ -170,6 +179,12 @@
         }
 
         // Function to update the schedule based on the selected date
+        function getDayName(dateStr, locale)
+        {
+            var date = new Date(dateStr);
+            return date.toLocaleDateString(locale, { weekday: 'short' });        
+        }
+
         function updateSchedule() {
             var datePicker = document.getElementById("startButton");
 			startButton.style.display = "none";
