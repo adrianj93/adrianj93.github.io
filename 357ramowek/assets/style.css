@@ -44,12 +44,24 @@ a[href^="tel"] {
 .date-header {
     background-color: #f95f1f;
     color: #fff;
-    padding: 8px;
+    padding: 7px 15px 0px 8px;
     border-radius: 7px 7px 0px 0px;
-    padding-top: 15px;
     font-size: 25px;
     font-family: font1;
     text-align: center;
+}
+
+.date-header-2 {
+    background-color: #f95f1f;
+    color: #ffffffa8;
+    padding-bottom: 7px;
+    margin-top: -3px;
+    font-size: 11px;
+    font-family: "font2", sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 3px;
 }
 
 .schedule-row {
