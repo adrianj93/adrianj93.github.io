@@ -14,13 +14,13 @@ body {
 
 a {
     color: inherit !important;
-    text-decoration-color: #edff9c !important;
+    text-decoration-color: #daed4c !important;
 }
 
 a[href^="tel"] {
     color: inherit !important;
     text-decoration: underline;
-    text-decoration-color: #edff9c !important;
+    text-decoration-color: #daed4c !important;
 }
 
 .schedule-container {
@@ -106,11 +106,6 @@ a[href^="tel"] {
         font-size: 14px;
         padding: 8px;
         margin: 8px;
-    }
-
-    a {
-        color: inherit;
-        text-decoration: none;
     }
 }
 
