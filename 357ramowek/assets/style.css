@@ -162,3 +162,8 @@ button:hover {
 button:active {
     background-color: #A13D14;
 }
+
+a {
+    color: inherit;
+    text-decoration: none;
+}

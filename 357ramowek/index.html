@@ -149,7 +149,7 @@
                                                 }
                                             }
                                 }
-                        console.log(err);
+                        // console.log(err);
                         }
 
 						image = program.image;
@@ -160,18 +160,31 @@
 							scheduleRow.onclick = function() { alert(description) };
 							descIndicator = '<span class="material-symbols-outlined">description</span>';
 							}
-                        var programAds = "";
+                        var programPodcast;
+                        programPodcast = "";
                         try {
-                            var programAds = program.ads;
+                            programPodcast = program.podcastId;
                         } catch {
-                            ///
+                            console.log(programPodcast)
                         }
-						if (programAds != "") {
-							descIndicator.concat(" ", '<span class="material-symbols-outlined">description</span>');
+                        
+						var podcastIndicator = "";
+						if (programPodcast != "") {
+                            podcastIndicator = '<span class="material-symbols-outlined">play_circle</span>';
+							console.log(programPodcast)
 							}
-                        programCell.innerHTML = 
-							'<div style="float: left; width: 70%"><span style="font-family: font1; font-size: 23px;">' + program_name + '</span>' + descIndicator + '<br/>' + '<div style="float: left;"><span style="color: #737373; font-size: 15px">' + authors +'</span></div></div>' + '<div style="margin: -4px -4px -8px 0px; float: right"><img class="program_pic" title="' + authors + '" src="' + image + '" onclick="copyToClipboard(\''+ description +'\')"></div>'
-							+ '<div style="clear: both"></div>';
+                        if (programPodcast != undefined ) {
+                            var programNameSlug = "";
+                            programNameSlug = program.program.slug;
+                            programCell.innerHTML = 
+                                '<div style="float: left; width: 70%"><span style="font-family: font1; font-size: 23px;"><a href="https://radio357.pl/podcasty/audycje/' + programNameSlug + '/odcinek/' + programPodcast + '">' + program_name + '</a></span>' + descIndicator + podcastIndicator + '<br/>' + '<div style="float: left;"><span style="color: #737373; font-size: 15px">' + authors +'</span></div></div>' + '<div style="margin: -4px -4px -8px 0px; float: right"><img class="program_pic" title="' + authors + '" src="' + image + '" onclick="copyToClipboard(\''+ description +'\')"></div>'
+                                + '<div style="clear: both"></div>';
+                        } else {
+                            programCell.innerHTML = 
+                                '<div style="float: left; width: 70%"><span style="font-family: font1; font-size: 23px;">' + program_name + '</span>' + descIndicator + '<br/>' + '<div style="float: left;"><span style="color: #737373; font-size: 15px">' + authors +'</span></div></div>' + '<div style="margin: -4px -4px -8px 0px; float: right"><img class="program_pic" title="' + authors + '" src="' + image + '" onclick="copyToClipboard(\''+ description +'\')"></div>'
+                                + '<div style="clear: both"></div>';
+                        }
+                
                         scheduleRow.appendChild(programCell);
                     });
                 }
