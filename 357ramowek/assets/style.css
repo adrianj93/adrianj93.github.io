@@ -19,6 +19,8 @@ a {
 
 a[href^="tel"] {
     color: inherit !important;
+    text-decoration: underline;
+    text-decoration-color: #edff9c !important;
 }
 
 .schedule-container {
