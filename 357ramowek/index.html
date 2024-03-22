@@ -175,9 +175,13 @@
 							}
                         if (programPodcast != undefined ) {
                             var programNameSlug = "";
-                            programNameSlug = program.program.slug;
+                            try{
+                                programNameSlug = program.program.slug;
+                             } catch {
+                                console.log(e)
+                             }
                             programCell.innerHTML = 
-                                '<div style="float: left; width: 70%"><span style="font-family: font1; font-size: 23px;"><a href="https://radio357.pl/podcasty/audycje/' + programNameSlug + '/odcinek/' + programPodcast + '">' + program_name + '</a></span>' + podcastIndicator + descIndicator + '<br/>' + '<div style="float: left;"><span style="color: #737373; font-size: 15px">' + authors +'</span></div></div>' + '<div style="margin: -4px -4px -8px 0px; float: right"><img class="program_pic" title="' + authors + '" src="' + image + '" onclick="copyToClipboard(\''+ description +'\')"></div>'
+                                '<div style="float: left; width: 70%"><span style="font-family: font1; font-size: 23px;"><a href="https://radio357.pl/podcasty/audycje/' + programNameSlug + '/odcinek/' + programPodcast + '">' + program_name + '</span>' + podcastIndicator + '</a>' + descIndicator + '<br/>' + '<div style="float: left;"><span style="color: #737373; font-size: 15px">' + authors +'</span></div></div>' + '<div style="margin: -4px -4px -8px 0px; float: right"><img class="program_pic" title="' + authors + '" src="' + image + '" onclick="copyToClipboard(\''+ description +'\')"></div>'
                                 + '<div style="clear: both"></div>';
                         } else {
                             programCell.innerHTML = 
