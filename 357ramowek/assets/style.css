@@ -93,6 +93,7 @@ a[href^="tel"] {
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 3px;
+    -webkit-font-smoothing: antialiased;
 }
 
 .schedule-row {
