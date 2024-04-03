@@ -139,22 +139,38 @@
                             program_name = "Audycja bez nazwy w API";
                         }	
                         try {
-                            authors = program.team[0].name + ", " + program.team[1].name + ", " + program.team[2].name + " i " + program.team[3].name;
+                            authors = program.team[0].name + ", " + program.team[1].name + ", " + program.team[2].name + ", " + program.team[3].name + ", " + program.team[4].name + ", " + program.team[5].name + ", " + program.team[6].name  + " i " + program.team[7].name;
                         } catch (err) {
+                            try {
+                                authors = program.team[0].name + ", " + program.team[1].name + ", " + program.team[2].name + ", " + program.team[3].name + ", " + program.team[4].name + program.team[5].name + " i " + program.team[6].name;
+                            } catch (err) {
                                 try {
-                                authors = program.team[0].name + ", " + program.team[1].name + " i " + program.team[2].name;
+                                    authors = program.team[0].name + ", " + program.team[1].name + ", " + program.team[2].name + ", " + program.team[3].name + ", " + program.team[4].name + " i " + program.team[5].name;
                                 } catch (err) {
                                     try {
-                                        authors = program.team[0].name + " i " + program.team[1].name;
-                                            } catch (err) {  
+                                        authors = program.team[0].name + ", " + program.team[1].name + ", " + program.team[2].name + ", " + program.team[3].name + " i " + program.team[4].name;
+                                    } catch (err) {
+                                            try {
+                                            authors = program.team[0].name + ", " + program.team[1].name + ", " + program.team[2].name + " i " + program.team[3].name;
+                                        } catch (err) {
                                                 try {
-                                                    authors = program.team[0].name;
+                                                authors = program.team[0].name + ", " + program.team[1].name + " i " + program.team[2].name;
                                                 } catch (err) {
-                                                    authors = "Radio 357";
+                                                    try {
+                                                        authors = program.team[0].name + " i " + program.team[1].name;
+                                                            } catch (err) {  
+                                                                try {
+                                                                    authors = program.team[0].name;
+                                                                } catch (err) {
+                                                                    authors = "Radio 357";
+                                                                }
+                                                            }
                                                 }
-                                            }
+                                        }
+                                    // console.log(err);
+                                    }
                                 }
-                        // console.log(err);
+                            }
                         }
 
 						image = program.image;
