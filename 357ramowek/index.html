@@ -20,7 +20,7 @@
         </center>
     </div>
     <div style="display: none;" id="scheduleContainer"></div>
-	<div class="copyright">© 2024, BDNT™ ver. 202406.28</div>
+	<div class="copyright">© 2024, BDNT™ ver. 202410.31 🎃</div>
     <script>
         window.matchMedia('(prefers-color-scheme: dark)')
             .addEventListener('change',({ matches }) => {
@@ -138,6 +138,9 @@
                         } catch (err) {
                             program_name = "Audycja bez nazwy w API";
                         }	
+						if (program_name == "") {
+							program_name = "Audycja bez nazwy w API";
+							}
                         try {
                             authors = program.team[0].name + ", " + program.team[1].name + ", " + program.team[2].name + ", " + program.team[3].name + ", " + program.team[4].name + ", " + program.team[5].name + ", " + program.team[6].name  + " i " + program.team[7].name;
                         } catch (err) {
